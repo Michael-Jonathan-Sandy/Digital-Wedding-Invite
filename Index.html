@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!-- Untuk img, jangan pakai lingkangan bulat, gunakan background image atau pas foto-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan</title>
+    <style> /*Challenge : Kloning Undangan lengkap DI RUMAH (kecuali Lingkaran dan link di akhir page) ke GitHub pages, temuin Sir di Ruang Guru jika Error */
+    /*Pertemuan Sabtu DEPAN Pagi diganti dengan Malam Jumat 18.30-20.00 dikarenakan ada masalah pribadi*/
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            transition: background-color 1s ease;
+            background-color: white;
+        }
+
+        body.dark {
+            background-color: black;
+            color: white;
+            transition: background-color 1s ease;
+        }
+
+        div.darkmode { /* add javaSCRIPT to make color changes and cookie */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4vw;
+            height: 10vh;
+            width: 5vw;
+            border-radius: 100pt;
+            border: 2pt gray solid;
+            background-color: black;
+            position: sticky;
+            left: 90vw;
+            top: 85vh;
+            cursor: pointer;
+            transition: background-color 1s ease;
+        }
+
+        div.darkmode:hover {
+            background-color: white;
+            border: 1pt black solid;
+            transition: background-color 1s ease;
+        }
+
+        span.darkmode-icon::after {
+            content: "🌒";
+        }
+
+        span.darkmode-icon.dark::after {
+            content: "☀️";
+            background-color: #FFFFFFFF;
+        }
+
+        div.container {
+            min-width: 300px;
+            max-width: 500px;
+            margin: 0px auto;
+        }
+
+        section.page {
+            width: 100%;
+            min-height: 100vh;
+            background-image: linear-gradient(to right, tan, transparent, tan);
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* gap: 300pt; */
+        }
+
+        p {
+            text-align: center;
+        }
+
+        section.page > div > p, section.page > div > h1{
+            text-align: center;
+        }
+
+        section.page.one {
+            gap: 300pt;
+        }
+
+        section.page.one > div > h1 {
+            font-size: 30pt;
+        }
+
+        section.page.two {
+            justify-content: space-evenly;
+            padding: 20px;
+        }
+
+        div.card {
+            padding: 10pt;
+            max-width: 250pt;
+            min-height: 300pt;
+            background-color: black;
+            border: 5px white solid;
+            color: white;
+            border-radius: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        div.circle {
+            width: 150pt;
+            height: 150pt;
+            border-radius: 75pt;
+            background-color: greenyellow;
+        }
+        
+        div.circle > img { /* Img Optional */
+            height: 100%;
+            border-radius: 100%;
+        }
+
+        div.line {
+            width: 150px;
+            height: 1px;
+            background-color: black;
+            margin: 10px auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        div.parent {
+            max-width: 100%;
+        }
+
+
+        div.img.grid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        div.img.grid > img {
+            height: 150px;
+            padding: 0px 5px 0px;
+            border-radius: 50px;
+            background-color: brown;
+        }
+
+        div.relative.flag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 20px;
+        }
+
+        div.relative.heart {
+            position: relative;
+            bottom: 20px;
+        }
+
+        section.page.four div.card.three div.top img.card-3-top {
+            border-radius: 150px;
+        }
+
+        section.page.four div.tanggal {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 25px;
+            height: 85px;
+            width: 325px;
+            border-radius: 25px;
+            /* gap: 30px; */
+            color: white;
+            background-color: black;
+        }
+
+        section.page.four div.tanggal div.waktu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 75px;
+            width: 65px;
+            border-radius: 15px;
+            border: 2px white solid;
+        }
+
+        section.page.four div.tanggal div.waktu.hari {
+            background-color: red;
+        }
+        section.page.four div.tanggal div.waktu.jam {
+            background-color: yellow;
+            color: black;
+        }
+        section.page.four div.tanggal div.waktu.menit {
+            background-color: green;
+        }
+        section.page.four div.tanggal div.waktu.detik {
+            background-color: blue;
+        }
+
+        section.page.four div.card.three a.open-maps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        section.page.four div.Save {
+            padding: 10pt;
+            min-width: 25pt;
+            min-height: 30pt;
+            background-color: gray;
+            color: white;
+            border-radius: 50px;
+        }
+
+        section.page.eight div.text.gift h2 {
+            text-align: center;
+        }
+
+        section.page.eight div.a.gift div.Gift {
+            padding: 10pt;
+            min-width: 25pt;
+            min-height: 30pt;
+            background-color: gray;
+            border-radius: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        section.page.ten div.credit-logo {
+            text-align: center;
+        }
+
+        section.page.ten div.credit-logo img {
+            border-radius: 50pt;
+            padding: 0pt 5pt 0pt;
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="darkmode">
+        <span class="darkmode-icon"></span>
+    </div>
+    <div class="container">
+        <section class="page one">
+            <div class="title">
+                <p>The Wedding of</p>
+                <h1>Budi & Cindy</h1>
+                <p>Minggu, 17 September 2023</p>
+            </div>
+            <div class="guest-name">
+                <p>Kepada Yth.</p>
+                <p>Dodi, Ph.D.</p>
+            </div>
+        </section>
+        <section class="page two">
+            <h2>The Beloved</h2>
+            <h1>Budi & Cindy</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi omnis delectus aliquam facere similique quaerat deserunt, hic minima perspiciatis necessitatibus officia voluptatem, repellat soluta assumenda nulla, numquam ipsum nesciunt minus.</p>
+            <div class="card 1">
+                <div class="circle"><img src="ada udang di balik batu.png" alt="img a"></div><!-- Untuk img, jangan pakai lingkangan bulat, gunakan background image atau pas foto-->
+                <h1>Cindy Gunawan Sireger, S. Pd.</h1>
+                <div class="line"></div>
+                <p>Putri Pertama</p>
+                <p>Bapak Syamsudin</p>
+                <p>&</p>
+                <p>Ibu Sumiati</p>
+            </div>
+        </section>
+        <section class="page three">
+            <div class="card 2">
+                <div class="circle"><img src="ada udang di balik batu.png" alt="img a"></div><!-- Untuk img, jangan pakai lingkangan bulat, gunakan background image atau pas foto-->
+                <h1>Cindy Gunawan Sireger, S. Pd.</h1>
+                <div class="line"></div>
+                <p>Putri Ketiga</p>
+                <p>Bapak (Alm) Bahtera Hidup</p>
+                <p>&</p>
+                <p>Ibu Hneri Yuniarsih</p>
+            </div>
+        </section>
+        <section class="page four">
+            <h1>Doa Pernikahan</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio minima quam, illo accusantium quia nihil culpa labore perferendis nam? Necessitatibus cum numquam quae fugit dicta perferendis distinctio. Molestiae, perspiciatis voluptatibus!</p>
+            <h2>[QS. AR Rum:21]</h2>
+            <div class="tanggal">
+                <div class="waktu hari">
+                    <p id="hari">0</p>
+                    <p>Hari</p>
+                </div>
+                <div class="waktu jam">
+                    <p id="jam">0</p>
+                    <p>Jam</p>
+                </div>
+                <div class="waktu menit">
+                    <p id="menit">0</p>
+                    <p>Menit</p>
+                </div>
+                <div class="waktu detik">
+                    <p id="detik">0</p>
+                    <p>Detik</p>
+                </div>
+            </div>
+                <div class="Save">
+                    <a href="#" class="Date">📅 Save The Date</button>
+                </div>
+                <div class="card three">
+                    <div class="top">
+                        <img class="card-3-top" src="Cangkir putih.png" alt="cangkir">
+                        <h3>Akad</h3>
+                        <p>Minggu, 17 September 2023</p>
+                        <p>07.30 WIB s/d Selesai</p>
+                        <div class="location">
+                            <div class="line"></div><div class="relative flag">🚩</div>
+                            <h4>Tempat</h4>
+                            <p>Ballroom The Golden Sriwijaya</p>
+                            <a class="open-maps" href="#">🎈Open Maps</a>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <h3>Resepsi</h3>
+                        <p>Minggu, 17 September 2023</p>
+                        <p>10.00 WIB s/d Selesai</p>
+                        <div class="location">
+                            <div class="line"></div><div class="relative flag">🚩</div>
+                            <h4>Tempat</h4>
+                            <p>Ballroom The Golden Sriwijaya</p>
+                            <a class="open-maps" href="#">🎈Open Maps</a>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <section class="page five">
+            <div class="health one">
+                <h1>Protokol Kesehatan</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quam voluptates natus facere corrupti, animi dolores non consequuntur, in eligendi, rem sint ipsam commodi quae asperiores earum aut! Voluptatem, quia!</p>
+            </div>
+            <div class="health two">
+                <p>Menggunakan Masker</p>
+                <p>😷</p>
+                <p>Harus Menggunakan masker selama acara</p>
+            </div>
+            <div class="health three">
+                <p>Mencuci Tangan</p>
+                <p>👋</p>
+                <p>Cuci Tangan Sebelum Masuk Lokasi</p>
+            </div>
+            <div class="health four">
+                <p>Menjaga Jarak</p>
+                <p>🕴️⬅️➡️🕴️</p>
+                <p>Menjaga Jarak dengan Orang Lain</p>
+            </div>
+            <div class="health five">
+                <p>Mengukur Suhu</p>
+                <p>🌡️</p>
+                <p>Mengukur Suhu Tubuh Sebelum Masuk</p>
+            </div>
+        </section>
+        <section class="page six">
+            <h1>Story of</h1>
+            <h2>Our Journey</h2>
+            <p>An unforgettable journey, and a journey that changed the purpose of our lives</p>
+            <div class="timeline 1">
+                <h1>Tahun 2013</h1>
+                <p>Budi & Cindy  bertemu di suatu ajang Bujang Gadis Kampus,</p>
+            </div>
+            <div class="line"></div><div class="relative heart">❤️</div>
+            <div class="timeline 2">
+                <h1>Tahun 2013</h1>
+                <p>Kami mulai menjalin hubungan. 9 tahun berlalu, setelah perjalanan panjang,
+                </p>
+            </div>
+            <div class="line"></div><div class="relative heart">❤️</div>
+            <div class="timeline 3">
+                <h1>Tahun 2013</h1>
+                <p>Cindy datang melamar, dan kami memutuskan untuk menikah, mengakhiri masa lajang pada September 2023.</p>
+            </div>
+            <div class="line"></div><div class="relative heart">❤️</div>
+        </section>
+        <section class="page seven">
+            <h1>Momen</h1>
+            <p>Budi & Cindy</p>
+            <div class="parent">
+                <div class="img grid 1"><img src="ada udang di balik batu.png" alt="a"><img src="Cangkir putih.png" alt="c"></div>
+                <div class="img grid 2"><img src="Banana.png" alt="b"></div>
+                <div class="img grid 3"><img src="ada udang di balik batu.png" alt="a"><img src="Cangkir putih.png" alt="c"></div>
+                <div class="img grid 4"><img src="Banana.png" alt="b"></div>
+            </div>
+        </section>
+        <section class="page eight">
+            <div class="text gift">
+                <h1>Share Love</h1>
+                <h2>Online Gift</h2>
+                <p>Do'a restu keluarga, sahabat, serta rekan-rekan semua di pernikahan kami sudah sangat cukup sebagai hadiah, tetapi jika memberi merupakan tanda kasih, kami dengan senang hati
+                    menerimanya dan tentunya semakin
+                    melengkapi kebahagiaan kami.</p>
+            </div>
+            <div class="a gift">
+                <div class="Gift top"><a href="#">🎁 Gift 1</a></div>
+                <div class="Gift bottom"><a href="#">🎁 Gift 2</a></div>
+            </div>
+        </section>
+        <section class="page nine">
+            <div class="text wish">
+                <h1>Give a Wish</h1>
+                <p>Silahkan Kirimkan Doa/Ucapan Selamat Kepada Kedua Mempelai Serta konfirmasi Kehadiran</p>
+            </div>
+            <div class="card wish">
+                <p>51 Comments</p>
+                <div class="hadir"></div>
+                <div class="tidak-hadir"></div>
+                <div class="masih-ragu"></div>
+                <form action="https://www.google.com/search#">
+                    <input type="text" name="q" id="" placeholder="Nama">
+                    <input type="text" name="q" id="" placeholder="Ucapan">
+                    <button class="KK">Konfirmasi Kehadiran \/</button>
+                    <button class="K">Kirim</button>
+                </form>
+            </div>
+        </section>
+        <section class="page ten">
+            <div class="text thanks">
+                <h1>Terima Kasih</h1>
+                <p>Budi & Cindy</p>
+            </div>
+            <div class="credit">
+                <div class="credit-logo"><img src="Cangkir putih.png" alt="c"></div>
+                <p>Template Created by Weddaystory.com</p>
+                <p>Hubungi WA : 0822-1021-6295</p>
+                <p>Instagram : Weddaystory</p>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+            let timer = 100005;
+        const dayText = document.getElementById("hari");
+        const hourText = document.getElementById("jam");
+        const minuteText = document.getElementById("menit");
+        const secondText = document.getElementById("detik");
+
+        function showTimer(timer){
+        const day = Math.floor(timer / (3600 * 24))
+        // const hour = Math.floor(timer / 3600); // 27 jam daripada 1 hari 3 jam membuat penghitung hari tak bergunna
+        const hour = Math.floor((timer % (3600 * 24)) / 3600);
+        const minute = Math.floor((timer % 3600) / 60);
+        const second = timer % 60;
+
+        dayText.innerHTML = day.toString().padStart(2, "0");
+        hourText.innerHTML = hour.toString().padStart(2, "0");
+        minuteText.innerHTML = minute.toString().padStart(2, "0");
+        secondText.innerHTML = second.toString().padStart(2, "0");
+    }
+
+    showTimer(timer);
+    setInterval(function(){
+        timer--;
+        showTimer(timer);
+
+    }, 1000)
+
+    document.addEventListener("DOMContentLoaded", () => {
+            
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark');
+
+            const isDarkMode = body.classList.contains('dark');
+            document.cookie = `darkMode=${isDarkMode};`
+        }
+
+        window.addEventListener('load', () => {
+            const cookie = document.cookie;
+            if (cookie.includes('darkMode=true')) {
+            document.body.classList.add('dark');
+            ;}
+        });
+        document.querySelector(".darkmode").addEventListener('click', () => {
+            // document.getElementById('darkmode-icon').toggleDarkMode();
+            toggleDarkMode()
+        })
+    });
+</script>
+</html>
